@@ -1,0 +1,156 @@
+<?php
+
+class mainController
+{
+	public static function index($request, $context)
+        {
+            return context::SUCCESS;
+        }
+
+
+	public static function helloWorld($request,$context)
+	{
+		$context->mavariable="hello world";
+
+		return context::SUCCESS;
+	}
+
+	public static function superTest($request,$context)
+	{
+		if(!empty($_GET['var1'] && !empty($_GET['var2']))){
+
+		$context->var1=$_GET['var1'];
+		$context->var2=$_GET['var2'];
+		return context::SUCCESS ;
+
+		}
+
+		else{
+
+		return context::ERROR ;
+		}
+		
+	}
+
+
+	// ----------------------  étape 2   -----------------------------
+
+public static function getUserById($request,$context)
+{	if(!empty($request["id"]) ) {
+			$context->id=$request['id'];	
+	
+		$context->user=utilisateurTable::getUserById($context->id);
+
+		
+			return context::SUCCESS;
+			}
+}
+
+public static function getReservationsByVoyage($request,$context)
+	{
+		if(!empty($request["id"]) ) {
+			$context->id=$request['id'];	
+	
+		$context->reservations=reservationTable::getReservationsByVoyage($context->id);
+		return context::SUCCESS;
+	}
+	}
+
+	public static function getVoyagesByTrajet($request,$context)
+	{
+		if(!empty($request["id"]) ) {
+			$context->id=$request['id'];
+			$context->voyages = voyageTable::getVoyagesByTrajet($context->id); 
+        	return context::SUCCESS;
+			}
+	//	$context->voyages=voyageTable::getVoyagesByTrajet(383); //
+		//	return context::SUCCESS;
+	}
+
+	public static function getTrajet($request,$context)
+	{
+		
+		 //$context->trajet=trajetTable::getTrajet("Paris","Amiens");
+			//return context::SUCCESS;
+		
+		
+        if(!empty($request["dep"]) && !empty($request["arr"]))
+        {
+        $context->dep=$request['dep'];
+        $context->arr=$request['arr'];
+        $context->trajet=trajetTable::getTrajet($context->dep, $context->arr);
+        //$context->trj=$trajet->id;
+	//	return context::SUCCESS;
+		$context->ban ="SUCCESS";
+		//echo "hamid";
+        }
+        else if (empty($request["dep"]) || empty($request["arr"]))  {
+           $context->ban ="error";
+           
+      	   //return context::ERROR;    
+            }
+      	//return( $context->ban) ;  
+        //$context->ban ="SUCCESS";
+        
+       
+        return context::SUCCESS; 
+        
+
+       /* if(!empty($request['dep'] && !empty($request['arr']))){
+            $context->dep = $request['dep'];
+            $context->arr = $request['arr'];
+            $trajet = trajetTable::getTrajet($context->dep,$context->arr);
+            
+            if($trajet){
+                $context->dis = $trajet->distance;
+                $context->status = 'success';
+            }else
+                return context::NONE;
+        }else {
+            $context->status = 'error';
+              }
+        return context::SUCCESS;
+    }
+    */
+    //public static function getTrajet($request, $context) { // depart=paris&arrivee=Amiens
+       // if ($request["dep"] && $request["arr"]) {
+        //	$context->dep =$request["dep"] ;
+        //	$context->arr = $request["arr"];
+        // $context->trajet = trajetTable::getTrajet($request["dep"], $request["arr"]  );
+		//	echo $request["dep"] ;
+         //   return context::SUCCESS;
+       // }
+        //return context::ERROR;
+       // echo "-----------------------------";
+    }
+		
+	
+	
+
+
+/*
+	 public static function Test($request,$context) 
+ {
+
+    $context->trajet=trajetTable::getTrajet("Dijon","Brest");
+    $context->voyage=voyageTable::getVoyagesByTrajet(383);
+    $context->utilisateur=utilisateurTable::getUserById(1);
+    $context->reservation=reservationTable::getReservationsByVoyage(1);
+
+    
+    return context::SUCCESS;
+    
+  }*/
+
+/*public static function rechercheVoyages($request,$context)
+	{
+		return context::SUCCESS;
+	}*/
+
+	
+
+
+
+
+
+}

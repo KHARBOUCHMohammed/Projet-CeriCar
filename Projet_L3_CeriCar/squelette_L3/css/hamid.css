@@ -1,0 +1,23 @@
+#banner
+{
+    width: 100%;
+    height: 20px;
+}
+
+#banner.success {
+ background-color:green;
+ border-radius : 25px;
+ text-align:center;
+ }
+        
+ #banner.error {
+background-color:red;
+border-radius : 25px;
+text-align:center;
+}
+
+#banner.warning{
+    background-color:rgba(217, 255, 0, 0.521);
+    border-radius : 25px;
+    text-align:center;
+    }
